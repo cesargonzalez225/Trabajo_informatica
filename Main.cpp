@@ -1,20 +1,15 @@
 
 #include "Freeglut.h"
 #include "Mundo.h"
-
-int main()
-{
-    Mundo mundo;
-
-    mundo.dibuja();
-}
-
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+Mundo mundo;
+
 void OnDraw(void);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) 
+{
     glutInit(&argc, argv);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -25,12 +20,16 @@ int main(int argc, char* argv[]) {
     gluPerspective(40.0, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1, 150);
 
     glutDisplayFunc(OnDraw);
+
+    mundo.dibuja();
+
     glutMainLoop();
 
     return 0;
 }
 
-void OnDraw(void) {
+void OnDraw(void) 
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
