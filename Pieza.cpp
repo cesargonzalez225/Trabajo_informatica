@@ -1,3 +1,4 @@
+#pragma once
 #include "Pieza.h"
 
 Pieza::~Pieza()
@@ -30,8 +31,4 @@ int Pieza::leerCasilla(Casilla &)
 int Pieza::getTurno()
 {
     return 0;
-}
-
-void Pieza::deshacerMovimiento(Jugada &)
-{
 }
