@@ -24,6 +24,6 @@ class Pieza
 
 	Jugada jugada;
 
-	static Tablero* punteroTablero;
+	static Tablero* pTablero;
 };
 
