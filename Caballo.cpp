@@ -1,3 +1,4 @@
+#pragma once
 #include "Caballo.h"
 
 Caballo::Caballo(void)

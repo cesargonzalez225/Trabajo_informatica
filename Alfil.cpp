@@ -1,3 +1,4 @@
+#pragma once
 #include "Alfil.h"
 
 Alfil::Alfil(void)
