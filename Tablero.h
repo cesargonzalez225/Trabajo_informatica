@@ -1,6 +1,6 @@
 #pragma once
-class Tablero
 
+class Tablero
 {
     static int Inicio[8][8];
 public:
@@ -8,6 +8,7 @@ public:
 	virtual ~Tablero(void);
 
     int tablero[8][8];
+    void dibuja();
 	int leerCasilla(Casilla &casilla);
 	void reset ();
 };

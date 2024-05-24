@@ -21,6 +21,11 @@ Tablero::Tablero(void)
 int Tablero::Inicio[8][8]=
 { {5,3,4,8,7,4,3,5} , {1,1,1,1,1,1,1,1} , {0,0,0,0,0,0,0,0} , {0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0} , {0,0,0,0,0,0,0,0} , {-1,-1,-1,-1,-1,-1,-1,-1} , {-5,-3,-4,-8,-7,-4,-3,-5} };
 
+void Tablero::dibuja()
+{
+    
+}
+
 int Tablero::leerCasilla(Casilla &casilla)
 {
   return tablero[casilla.x][casilla.y];
