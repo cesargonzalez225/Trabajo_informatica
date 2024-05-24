@@ -9,6 +9,7 @@ struct Jugada
 
 class Pieza
 {
+    public:
 	Pieza();
 	~Pieza();
 
