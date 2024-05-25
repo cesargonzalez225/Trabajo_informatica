@@ -1,4 +1,5 @@
 #include "CoordinadorAjedrez.h"
+#include <stdio.h>
 
 
 CoordinadorAjedrez::CoordinadorAjedrez()
@@ -43,6 +44,13 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 	}
 }
 
+void CoordinadorAjedrez::raton(Casilla& casilla)
+{
+
+
+
+}
+
 void CoordinadorAjedrez::dibuja() {
 	if (estado == INICIO) {
 		//glTranslatef(-4, 1, -4);
@@ -81,7 +89,7 @@ void CoordinadorAjedrez::dibuja() {
 	{
 		//mundo.dibuja();
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!",
+		ETSIDI::printxy("ENHORABUENA, ï¿½Has triunfado!",
 			-5, 10);
 		ETSIDI::printxy("Pulsa-C- para continuar", -5, 9);
 	}
