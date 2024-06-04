@@ -7,5 +7,5 @@ public:
 	Peon(void);
 	virtual ~Peon(void);
 
-	bool mover (struct Jugada&);
+	Tablero movimiento(Tablero tablero, Casilla origen);
 };

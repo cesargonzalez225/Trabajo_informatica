@@ -7,5 +7,5 @@ public:
 	Reina(void);
 	virtual ~Reina(void);
 
-	bool mover (struct Jugada&);
+	Tablero movimiento(Tablero tablero, Casilla origen);
 };

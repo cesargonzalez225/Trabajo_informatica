@@ -10,6 +10,5 @@
 #include "Torre.h"
 
 Tablero sumamatrices(Tablero x, Tablero y);
-Tablero multiplicamatrices(Tablero x, Tablero y);
 Tablero vermovimiento(Tablero tablero, Casilla origen, int turno);
 Tablero forzarcomer(Tablero tablero, Casilla ultimomov, int turno);

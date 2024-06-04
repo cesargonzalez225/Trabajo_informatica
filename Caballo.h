@@ -8,5 +8,5 @@ public:
 	Caballo(void);
 	virtual ~Caballo(void);
 
-	bool mover (struct Jugada&);
+	Tablero movimiento(Tablero tablero, Casilla origen);
 };
