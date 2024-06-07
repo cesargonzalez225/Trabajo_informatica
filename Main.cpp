@@ -17,6 +17,7 @@ void ControlRaton(int button, int state, int x, int y);
 
 int main(int argc, char* argv[])
 {
+    ETSIDI::playMusica("sonidos/spaceinvaders.mp3", true);
     glutInit(&argc, argv);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -43,10 +44,9 @@ void OnDraw(void)
 
     gluLookAt(0.0, 25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0);
 
-    // Draw the textured background
-   glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/fondo9.png").id);
-   glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHTING);
 
     glBegin(GL_POLYGON);
     glColor3f(1, 1, 1);
@@ -55,29 +55,32 @@ void OnDraw(void)
     glTexCoord2d(1, 1); glVertex3d(10, 0, 10);
     glTexCoord2d(0, 1); glVertex3d(-10, 0, 10);
     glEnd();
-    //glEnable(GL_LIGHTING);
+
     glEnable(GL_TEXTURE_2D);
 
-    // Draw the chessboard or other elements
+
+
     Ajedrez.dibuja();
 
     glutSwapBuffers();
 }
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
-    //poner aqui el c�digo de teclado
+    ETSIDI::play("sonidos/pistola.wav");
+    //poner aqui el código de teclado
     Ajedrez.tecla(key);
     glutPostRedisplay();
 }
 
 void ControlRaton(int button, int state, int x, int y)
 {
+
     float w = glutGet(GLUT_WINDOW_WIDTH);
     float h = glutGet(GLUT_WINDOW_HEIGHT);
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         Casilla casilla;
         x = x - 256;
-        y = y- 79;
+        y = y - 79;
         if (0 <= x && x <= 35) {
             casilla.x = 1;
         }
@@ -103,40 +106,41 @@ void ControlRaton(int button, int state, int x, int y)
             casilla.x = 8;
         }
 
-        if (0 <= y && y <= 35) {
+        if (16 <= y && y <= 49) {
             casilla.y = 1;
         }
-        else if (35 < y && y <= 70) {
+        else if (49 < y && y <= 82) {
             casilla.y = 2;
         }
-        else if (70 < y && y <= 105) {
+        else if (82 < y && y <= 115) {
             casilla.y = 3;
         }
-        else if (105 < y && y <= 140) {
+        else if (115 < y && y <= 148) {
             casilla.y = 4;
         }
-        else if (140 < y && y <= 175) {
+        else if (148 < y && y <= 181) {
             casilla.y = 5;
         }
-        else if (175 < y && y <= 210) {
+        else if (181 < y && y <= 214) {
             casilla.y = 6;
         }
-        else if (210 < y && y <= 245) {
+        else if (214 < y && y <= 247) {
             casilla.y = 7;
         }
-        else if (245 < y && y <= 280) {
+        else if (247 < y && y <= 280) {
             casilla.y = 8;
         }
 
         std::cout << "Casilla:" << casilla.x << "," << casilla.y << endl;
         Ajedrez.raton(casilla);
+        glutPostRedisplay();
     }
 
 }
 
 void OnTimer(int value)
 {
-    //poner aqui el c�digo de animacion
+    //poner aqui el código de animacion
    // Ajedrez.mueve();
     //no borrar estas lineas
     glutTimerFunc(25, OnTimer, 0);
