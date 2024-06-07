@@ -175,7 +175,7 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
 	 int x2 = 1, y2 = 1;
 	 int x1 = origen.x;
 	 int y1 = origen.y;
-	 int c = 0, s = 0, i = 1;
+	 int c = 0;
 
 	 for (x2 = 1; x2 < 9; x2++)
 	 {
@@ -201,7 +201,7 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
 	 int x2 = 1, y2 = 1;
 	 int x1 = origen.x;
 	 int y1 = origen.y;
-	 int c = 0, s = 0, i = 1;
+	 int c = 0, i = 1;
 
 	 for (x2 = 1; x2 < 9; x2++)
 	 {
@@ -270,10 +270,10 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
  }
  void Pieza::movimientoAlfil(Tablero tablero, Casilla origen)
  {
-	 int x2 = 1, y2 = 1;
+ int x2 = 1, y2 = 1;
  int x1 = origen.x;
  int y1 = origen.y;
- int c = 0, s = 0, i = 1;
+ int c = 0, i = 1;
 
  for (x2 = 1; x2 < 9; x2++)
  {
@@ -342,10 +342,10 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
  }
  void Pieza::movimientoCaballo(Tablero tablero, Casilla origen)
  {
-	int x2 = 1, y2 = 1;
+int x2 = 1, y2 = 1;
 int x1 = origen.x;
 int y1 = origen.y;
-int c = 0, s = 0, i = 1;
+int c = 0;
 
 for (x2 = 1; x2 < 9; x2++)
 {
