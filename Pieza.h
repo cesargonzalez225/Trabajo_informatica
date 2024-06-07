@@ -2,27 +2,25 @@
 #include "Casilla.h"
 #include "Tablero.h"
 
-struct Jugada
-{
-	Casilla inicio, fin;
-};
 
 class Pieza
 {
     public:
-	Pieza();
-	~Pieza();
-
-	virtual bool mover(struct Jugada&);
-	void nuevaPosicion(struct Jugada&);
-	void escribirPosicion(Casilla&, int);
-
-	bool comprobarColision(struct Jugada&);
-	int leerCasilla(Casilla&);
-	int getTurno();
-
-	Jugada jugada;
-
-	static Tablero* pTablero;
+		Pieza();
+		~Pieza();
+		Tablero iluminado;
+		Tablero matriz;
+		Tablero matrizcomer;
+		Tablero sumamatrices(Tablero x, Tablero y);
+		Tablero multiplicamatrices(Tablero x, Tablero y);
+		void movimientos(Tablero tablero, Casilla origen, int turno);//antigua ver movimiento
+		void movimientoPeon(Tablero tablero, Casilla origen);
+		void movimientoReina(Tablero tablero, Casilla origen);
+		void movimientoCaballo(Tablero tablero, Casilla origen);
+		void movimientoAlfil(Tablero tablero, Casilla origen);
+		void movimientoRey(Tablero tablero, Casilla origen);
+		void movimientoTorre(Tablero tablero, Casilla origen);
+		void forzarcomer(Tablero tablero, int turno);
+		void vermovimiento(Tablero& tablero, Casilla origen, int turno);
 };
 
