@@ -54,3 +54,75 @@ void DibujarPiezas::dibujaPieza(int x, int y, const char* tex)
     glDisable(GL_BLEND);
     glEnable(GL_LIGHTING);
 }
+
+void DibujarPiezas::dibujaPeonNegra(int x, int y)
+{
+    const char* text = "imagenes/peonNegro.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaPeonBlanca(int x, int y)
+{
+    const char* text = "imagenes/peonBlanco.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaAlfilNegra(int x, int y)
+{
+    const char* text = "imagenes/alfilNegro.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaAlfilBlanca(int x, int y)
+{
+    const char* text = "imagenes/alfilBlanco.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaTorreNegra(int x, int y)
+{
+    const char* text = "imagenes/torreNegra.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaTorreBlanca(int x, int y)
+{
+    const char* text = "imagenes/torreBlanca.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaCaballoNegra(int x, int y)
+{
+    const char* text = "imagenes/caballoNegro.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaCaballoBlanca(int x, int y)
+{
+    const char* text = "imagenes/caballoBlanco.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaReyNegra(int x, int y)
+{
+    const char* text = "imagenes/reyNegro.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaReyBlanca(int x, int y)
+{
+    const char* text = "imagenes/reyBlanco.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaReinaNegra(int x, int y)
+{
+    const char* text = "imagenes/damaNegra.png";
+    dibujaPieza(x, y, text);
+}
+
+void DibujarPiezas::dibujaReinaBlanca(int x, int y)
+{
+    const char* text = "imagenes/damaBlanca.png";
+    dibujaPieza(x, y, text);
+}
