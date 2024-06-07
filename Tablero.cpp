@@ -73,3 +73,15 @@ for (int i = 0; i < tamañoTablero; ++i)
 glPopMatrix();
 
 }
+
+int Tablero::mover(Casilla origen, Casilla destino)
+{
+	if (iluminacion[destino.y-1][destino.x-1] == 1)
+	{
+		tablero[destino.y-1][destino.x-1] = tablero[origen.y-1][origen.x-1];
+		tablero[origen.y-1][origen.x-1] = 0;
+		return 1;
+	}
+	else
+		return 0;
+}
