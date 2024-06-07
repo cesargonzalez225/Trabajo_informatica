@@ -375,28 +375,55 @@ for (x2 = 1; x2 < 9; x2++)
 	 TableroAlfil = matriz;
 	 matriz = sumamatrices(TableroAlfil, TableroTorre);
  }
- void Pieza::forzarcomer(Tablero tablero, int turno)//devuelve una matriz con 1s y 0s que restringe donde se puede mover cualquier pieza
+void Pieza::forzarcomer(Tablero tablero, int turno)//devuelve una matriz con 1s y 0s que restringe donde se puede mover cualquier pieza
  {//Hay que multiplicar la matriz con la de vermovimiento para ver cuales son las casillas reales a las que se puede mover
-
+	 using namespace std;
 	 Casilla origen;
-	 int x1, y1, x2, y2, i, j;
+	 int x1, y1, x2, y2, i, j; // ahogado = 0;
 	 Tablero movimientostotal;
+	 movimientostotal = matriz;
 	 Tablero piezascontrario;
 	 for (x1 = 0; x1 < 8; x1++)//Se hace una matriz que tiene como 0 las casillas a las que ninguna pieza se puede mover y >=1 a las que si
 	 {
 		 for (y1 = 0; y1 < 8; y1++)
 		 {
 
-			 if (tablero.tablero[x1][y1] < 0 && turno % 2 == 0)//comprueba que sea turno blancas y que sea una pieza blanca
+			 if (tablero.tablero[y1][x1] < 0 && turno % 2 == 0)//comprueba que sea turno blancas y que sea una pieza blanca
 			 {
-				 origen.x = x1;
-				 origen.y = y1;
+				 origen.x = x1 + 1;
+				 origen.y = y1 + 1;
+				 movimientos(tablero, origen, turno);//saca las casillas a las que una pieza se puede mover
+			 }
+			 if (tablero.tablero[y1][x1] > 0 && turno % 2 != 0)//comprueba que sea turno negras y que sea una pieza negra
+			 {
+				 origen.x = x1 + 1;
+				 origen.y = y1 + 1;
 				 movimientos(tablero, origen, turno);//saca las casillas a las que una pieza se puede mover
 			 }
 			 movimientostotal = sumamatrices(movimientostotal, matriz); //va sacando las casillas a las que el conjunto de las piezas se pueden mover
 
 		 }
 	 }
+	 /*FINAL DE JUEGO POR AHOGADO
+	 int finj = 0;
+	 for (int i = 0; i < 8; i++)//Comprueba si hay al menos un 1
+	 {
+		 for (int j = 0; j < 8; j++)
+		 {
+			 if (movimientostotal.tablero[i][j] > 0)
+				 finj++;
+		 }
+	 }
+	 if (finj == 0)
+	 {
+		 if (turno % 2 == 0)
+			 ahogado = 1;//las blancas no pueden mover
+		 if (turno % 2 != 0)
+			 ahogado = 2;//las negras no pueden mover
+	 }
+	 FIN DE AHOGADO*/
+
+
 	 for (int i = 0; i < 8; i++)//Se hace una matriz que tiene las piezas contrarias como 1 y el resto 0
 	 {
 		 for (int j = 0; j < 8; j++)
@@ -415,7 +442,7 @@ for (x2 = 1; x2 < 9; x2++)
 	 {
 		 for (int j = 0; j < 8; j++)
 		 {
-			 if (matrizcomer.tablero[i][j] >= 1)//trasnforma los >=1 en 1 
+			 if (matrizcomer.tablero[i][j] > 1)//trasnforma los >1 en 1 
 				 matrizcomer.tablero[i][j] = 1;
 		 }
 	 }
@@ -426,7 +453,7 @@ for (x2 = 1; x2 < 9; x2++)
 	 {
 		 for (int j = 0; j < 8; j++)
 		 {
-			 if (matrizcomer.tablero[i][j] >= 1)
+			 if (matrizcomer.tablero[i][j] > 0)
 				 cont++;
 		 }
 	 }
