@@ -85,3 +85,14 @@ int Tablero::mover(Casilla origen, Casilla destino)
 	else
 		return 0;
 }
+
+void Tablero::ceroilum()
+{
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			iluminacion[i][j] = 0;
+		}
+	}
+}
