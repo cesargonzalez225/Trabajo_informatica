@@ -12,7 +12,6 @@ int tablero[8][8]; //matriz de piezas del tablero
 int iluminacion[8][8]; //matriz de casillas iluminadas del tablero
 
 void dibuja();
-int leerCasilla(Casilla &casilla);
 int mover(Casilla, Casilla);
 void ceroilum();
 };
