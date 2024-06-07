@@ -271,98 +271,99 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
  void Pieza::movimientoAlfil(Tablero tablero, Casilla origen)
  {
 	 int x2 = 1, y2 = 1;
-	 int x1 = origen.x;
-	 int y1 = origen.y;
-	 int c = 0, s = 0, i = 1;
+ int x1 = origen.x;
+ int y1 = origen.y;
+ int c = 0, s = 0, i = 1;
 
-	 for (x2 = 1; x2 < 9; x2++)
+ for (x2 = 1; x2 < 9; x2++)
+ {
+	 for (y2 = 1; y2 < 9; y2++)
 	 {
-		 for (y2 = 1; y2 < 9; y2++)
+		 i = 1;
+		 c = 0;
+		 if ((tablero.tablero[y1 - 1][x1 - 1] < 0 && tablero.tablero[y2 - 1][x2 - 1] < 0) || (tablero.tablero[y1 - 1][x1 - 1] > 0 && tablero.tablero[y2 - 1][x2 - 1] > 0)) {	//Mira si es una pieza enemiga o vacia
+			 c = 1;
+		 }
+		 else if (abs(x2 - x1) != abs(y2 - y1)) {		//Mira si esta fuera de diagonales 
+			 c = 1;
+		 }
+		 else if ((x2 - x1) > 0 && (y2 - y1) > 0)// Caso 1 Comprobacion abajo derecha
 		 {
-			 c = 0;
-			 if ((tablero.tablero[y1 - 1][x1 - 1] < 0 && tablero.tablero[y2 - 1][x2 - 1] < 0) || (tablero.tablero[y1 - 1][x1 - 1] > 0 && tablero.tablero[y2 - 1][x2 - 1] > 0)) {	//Mira si es una pieza enemiga o vacia
-				 c = 1;
-			 }
-			 else if (abs(x2 - x1) != abs(y2 - y1)) {		//Mira si esta fuera de diagonales 
-				 c = 1;
-			 }
-			 else if ((x2 - x1) > 0 && (y2 - y1) > 0)// Caso 1 Comprobacion abajo derecha
+			 while (c == 0 && x1 + i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
 			 {
-				 while (c == 0 && x1 + i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
+				 if (tablero.tablero[y1 + i - 1][x1 + i - 1] != 0)//Si hay una ficha c=1
 				 {
-					 if (tablero.tablero[y1][x1] != 0)//Si hay una ficha c=1
-					 {
-						 c = 1;
-					 }
-					 i++;
+					 c = 1;
 				 }
+				 i++;
 			 }
-			 else if ((x2 - x1) > 0 && (y2 - y1) < 0)// Caso 2 Comprobacion arriba derecha
+		 }
+		 else if ((x2 - x1) > 0 && (y2 - y1) < 0)// Caso 2 Comprobacion arriba derecha
+		 {
+			 while (c == 0 && x1 + i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
 			 {
-				 while (c == 0 && x1 + i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
+				 if (tablero.tablero[y1 - i - 1][x1 + i - 1] != 0)//Si hay una ficha c=1
 				 {
-					 if (tablero.tablero[y1 - 2][x1] != 0)//Si hay una ficha c=1
-					 {
-						 c = 1;
-					 }
-					 i++;
+					 c = 1;
 				 }
+				 i++;
 			 }
-			 else if ((x2 - x1) < 0 && (y2 - y1) > 0)// Caso 3 Comprobacion abajo izquierda
+		 }
+		 else if ((x2 - x1) < 0 && (y2 - y1) > 0)// Caso 3 Comprobacion abajo izquierda
+		 {
+			 while (c == 0 && x1 - i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
 			 {
-				 while (c == 0 && x1 - i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
+				 if (tablero.tablero[y1 + i - 1][x1 - i - 1] != 0)//Si hay una ficha c=1
 				 {
-					 if (tablero.tablero[y1][x1 - 2] != 0)//Si hay una ficha c=1
-					 {
-						 c = 1;
-					 }
-					 i++;
+					 c = 1;
 				 }
+				 i++;
 			 }
-			 else if ((x2 - x1) < 0 && (y2 - y1) < 0)// Caso 4 Comprobacion arriba izquierda
+		 }
+		 else if ((x2 - x1) < 0 && (y2 - y1) < 0)// Caso 4 Comprobacion arriba izquierda
+		 {
+			 while (c == 0 && x1 - i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
 			 {
-				 while (c == 0 && x1 - i != x2)//Repetir bucle hasta que haya una ficha en medio o que llegue a p2
+				 if (tablero.tablero[y1 - i - 1][x1 - i - 1] != 0)//Si hay una ficha c=1
 				 {
-					 if (tablero.tablero[y1 - 2][x1 - 2] != 0)//Si hay una ficha c=1
-					 {
-						 c = 1;
-					 }
-					 i++;
+					 c = 1;
 				 }
+				 i++;
 			 }
-			 if (c == 0) {
-				 matriz.tablero[y2 - 1][x2 - 1] = 1;
-			 }
-			 else {
-				 matriz.tablero[y2 - 1][x2 - 1] = 0;
-			 }
+		 }
+		 if (c == 0) {
+			 matriz.tablero[y2 - 1][x2 - 1] = 1;
+		 }
+		 else {
+			 matriz.tablero[y2 - 1][x2 - 1] = 0;
 		 }
 	 }
  }
+ }
  void Pieza::movimientoCaballo(Tablero tablero, Casilla origen)
  {
-	 int x2 = 1, y2 = 1;
-	 int x1 = origen.x;
-	 int y1 = origen.y;
-	 int c = 0, s = 0, i = 1;
+	int x2 = 1, y2 = 1;
+int x1 = origen.x;
+int y1 = origen.y;
+int c = 0, s = 0, i = 1;
 
-	 for (x2 = 1; x2 < 9; x2++)
-	 {
-		 for (y2 = 1; y2 < 9; y2++)
-		 {
-			 c = 0;
+for (x2 = 1; x2 < 9; x2++)
+{
+ for (y2 = 1; y2 < 9; y2++)
+ {
+	 c = 0;
 
-			 if ((((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) != 5) || (tablero.tablero[y1-1][x1-1] < 0 && tablero.tablero[y2-1][x2-1] < 0) || (tablero.tablero[y1-1][x1-1] > 0 && tablero.tablero[y2-1][x2-1] > 0))//Comprueba que pueda hacer el movimiento comprobando si la suma de los catetos al cudrado es igual a 5
-				 c = 1;
+	 if ((((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) != 5) || (tablero.tablero[y1-1][x1-1] < 0 && tablero.tablero[y2-1][x2-1] < 0) || (tablero.tablero[y1-1][x1-1] > 0 && tablero.tablero[y2-1][x2-1] > 0))//Comprueba que pueda hacer el movimiento comprobando si la suma de los catetos al cudrado es igual a 5
+		 c = 1;
 
-			 if (c == 0) {
-				 matriz.tablero[y2-1][x2-1] = 1;
-			 }
-			 else {
-				 matriz.tablero[y2-1][x2-1] = 0;
-			 }
-		 }
+	 if (c == 0) {
+		 matriz.tablero[y2-1][x2-1] = 1;
 	 }
+	 else {
+		 matriz.tablero[y2-1][x2-1] = 0;
+	 }
+ }
+}
  }
  void Pieza::movimientoReina(Tablero tablero, Casilla origen)
  {
@@ -456,15 +457,16 @@ void Pieza::movimientoPeon(Tablero tablero, Casilla origen)
  }
  Tablero Pieza::multiplicamatrices(Tablero x, Tablero y)//multiplica los terminos de dentro 1 a 1 
  {
+	
 	 Tablero tableroreturn;
-	 int i, j;
-	 for (i = 0; i < 8; i++)
+ int i, j;
+ for (i = 0; i < 8; i++)
+ {
+	 for (j = 0; j < 8; j++)
 	 {
-		 for (j = 0; j < 8; j++)
-		 {
-			 tableroreturn.tablero[i][j] = x.tablero[i][j] * y.tablero[i][j];// Suma las matrices
-		 }
+		 tableroreturn.tablero[i][j] = x.tablero[i][j] * y.tablero[i][j];// Suma las matrices
 	 }
-	 return tableroreturn;
+ }
+ return tableroreturn;
 
  }
