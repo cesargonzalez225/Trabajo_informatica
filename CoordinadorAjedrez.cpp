@@ -51,13 +51,13 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		}
 
 	}
-	else if (estado == GANANNEGRAS)
+	else if (estado == GANANBLANCAS)
 	{
 		ETSIDI::stopMusica();
 		if (key == 'c')
 			estado = INICIO;
 	}
-	else if (estado == GANANBLANCAS)
+	else if (estado == GANANNEGRAS)
 	{
 		ETSIDI::stopMusica();
 		if (key == 'c')
@@ -68,7 +68,7 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 void CoordinadorAjedrez::raton(Casilla& casilla)
 {
 	using namespace std;
-	std::cout << "Pieza:" << tablero.tablero[casilla.y - 1][casilla.x - 1] << endl;
+	std::cout << "Pieza:" << tablero.tablero[casilla.y-1][casilla.x-1] << endl;
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -77,7 +77,7 @@ void CoordinadorAjedrez::raton(Casilla& casilla)
 		}
 		std::cout << endl;
 	}
-	if (casilla.x > 0 && casilla.x < 9 && casilla.y>0 && casilla.y < 9)
+	if (casilla.x > 0 && casilla.x<9 && casilla.y>0 && casilla.y < 9)
 	{
 		if ((turno == NEGRAS && tablero.tablero[casilla.y - 1][casilla.x - 1] > 0) || (turno == BLANCAS && tablero.tablero[casilla.y - 1][casilla.x - 1] < 0))
 		{
@@ -112,7 +112,7 @@ void CoordinadorAjedrez::dibuja() {
 			0, 0);
 		ETSIDI::setTextColor(1, 1, 1);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-		ETSIDI::printxy("PULSE LA TECLA-E- PARA EMPEZAR", -3, -12);
+		ETSIDI::printxy("PULSE LA TECLA-E- PARA EMPEZAR",-3, -12);
 		ETSIDI::printxy("PULSE LA TECLA-S- PARA SALIR", -3, -20);
 		ETSIDI::printxy("Coding Grandmasters", -4, -45);
 
@@ -170,14 +170,15 @@ void CoordinadorAjedrez::dibuja() {
 	}
 	else if (estado == JUEGO)
 	{
+		finalcheck(tablero);
 		if (turno == BLANCAS)
 			turnonum = 2;
 		else
 			turnonum = 1;
 		if (accion == 1) {
-			est = pieza.vermovimiento(tablero, origen, turnonum);
+			pieza.vermovimiento(tablero, origen, turnonum);
 		}
-		else if (accion == 2) {
+		else if (accion == 2){
 			if (tablero.mover(origen, destino) == 1) {
 				accion = 0;
 				origen.x = -1;
@@ -194,30 +195,58 @@ void CoordinadorAjedrez::dibuja() {
 			destino.y = -1;
 		}
 		mundo.dibuja(tablero);
-		if (est == 1)
-			estado = AHOGADOB;
-		if (est == 2)
-			estado = AHOGADON;
 	}
-	else if (estado == GANANNEGRAS
-		)
+	else if (estado == GANANBLANCAS)
 	{
-		mundo.dibuja(tablero);
-		ETSIDI::setTextColor(1, 0, 0);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("GAMEOVER: Has perdido",
-			-5, 10);
-		ETSIDI::printxy("Pulsa-C- para continuar",
-			-5, 5);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/GANANBLANCAS.png").id);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glDisable(GL_LIGHTING);
+
+		int tam = 2;
+		int alarg = 3;
+		glPushMatrix();
+		glTranslatef(0.0f, 1.0f, -1.2f);
+		glBegin(GL_POLYGON);
+		glColor4f(1, 1, 1, 1);
+		glTexCoord2d(0, 0); glVertex3d(-tam - alarg, 0, -tam);
+		glTexCoord2d(1, 0); glVertex3d(tam + alarg, 0, -tam);
+		glTexCoord2d(1, 1); glVertex3d(tam + alarg, 0, tam);
+		glTexCoord2d(0, 1); glVertex3d(-tam - alarg, 0, tam);
+		glEnd();
+		glPopMatrix();
+
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 	}
-	else if (estado == GANANBLANCAS
-		)
+	else if (estado == GANANNEGRAS)
 	{
-		//mundo.dibuja();
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!",
-			-5, 10);
-		ETSIDI::printxy("Pulsa-C- para continuar", -5, 9);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/GANANNEGRAS.png").id);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glDisable(GL_LIGHTING);
+
+		int tam = 2;
+		int alarg = 3;
+		glPushMatrix();
+		glTranslatef(0.0f, 1.0f, -1.2f);
+		glBegin(GL_POLYGON);
+		glColor4f(1, 1, 1, 1);
+		glTexCoord2d(0, 0); glVertex3d(-tam - alarg, 0, -tam);
+		glTexCoord2d(1, 0); glVertex3d(tam + alarg, 0, -tam);
+		glTexCoord2d(1, 1); glVertex3d(tam + alarg, 0, tam);
+		glTexCoord2d(0, 1); glVertex3d(-tam - alarg, 0, tam);
+		glEnd();
+		glPopMatrix();
+
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 	}
 	else if (estado == PAUSA)
 	{
@@ -265,4 +294,3 @@ void CoordinadorAjedrez::finalcheck(Tablero tablero)
 		estado = GANANBLANCAS;
 
 }
-
