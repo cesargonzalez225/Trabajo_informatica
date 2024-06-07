@@ -24,7 +24,7 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		if (key == 'e')
 		{
 			ETSIDI::stopMusica();
-
+			
 			mundo.dibuja(tablero);
 			//	mundo.inicializa();
 			estado = JUEGO;
@@ -38,7 +38,7 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		//mundo.tecla(key);
 		if (key == 'p')
 		{
-
+		
 			estado = PAUSA;
 		}
 	}
@@ -119,11 +119,49 @@ void CoordinadorAjedrez::dibuja() {
 
 
 		glEnable(GL_TEXTURE_2D);
-
+	
 
 
 
 	}
-
+	else if (estado == JUEGO)
+	{
+		if (turno == BLANCAS)
+			turnonum = 2;
+		else
+			turnonum = 1;
+		if (accion == 1) {
+			pieza.vermovimiento(tablero, origen, turnonum);
+		}
+		else if (accion == 2) {
+			if (tablero.mover(origen, destino) == 1) {
+				accion = 0;
+				origen.x = -1;
+				origen.y = -1;
+				tablero.ceroilum();
+				if (turno == NEGRAS)
+					turno = BLANCAS;
+				else if (turno == BLANCAS)
+					turno = NEGRAS;
+			}
+			else
+				accion = 1;
+			destino.x = -1;
+			destino.y = -1;
+		}
+		mundo.dibuja(tablero);
+	}
+	else if (estado == GAMEOVER
+		)
+	{
+		
+	}
+	else if (estado == FIN
+		)
+	{
+	}
+	else if (estado == PAUSA)
+	{
+		
 	}
 }
