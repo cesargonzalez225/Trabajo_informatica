@@ -23,4 +23,5 @@ protected:
 	Estado estado;
 	Casilla origen, destino;
 	Pieza pieza;
+	void finalcheck(Tablero Tablero);
 };
