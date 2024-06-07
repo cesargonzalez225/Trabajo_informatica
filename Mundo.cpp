@@ -9,7 +9,7 @@ Mundo::~Mundo()
 {
 }
 
-void Mundo::dibuja()
+void Mundo::dibuja(Tablero& tablero)
 {
     tablero.dibuja();
     dibujarPiezas(tablero);
