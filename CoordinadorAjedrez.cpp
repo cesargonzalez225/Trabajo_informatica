@@ -24,7 +24,7 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		if (key == 'e')
 		{
 			ETSIDI::stopMusica();
-			
+			ETSIDI::play("sonidos/pistola.wav");
 			mundo.dibuja(tablero);
 			//	mundo.inicializa();
 			estado = JUEGO;
@@ -38,7 +38,7 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		//mundo.tecla(key);
 		if (key == 'p')
 		{
-		
+			ETSIDI::playMusica("sonidos/spaceinvaders.mp3", true);
 			estado = PAUSA;
 		}
 	}
@@ -51,13 +51,13 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 		}
 
 	}
-	else if (estado == GAMEOVER)
+	else if (estado == GANANNEGRAS)
 	{
 		ETSIDI::stopMusica();
 		if (key == 'c')
 			estado = INICIO;
 	}
-	else if (estado == FIN)
+	else if (estado == GANANBLANCAS)
 	{
 		ETSIDI::stopMusica();
 		if (key == 'c')
@@ -119,8 +119,52 @@ void CoordinadorAjedrez::dibuja() {
 
 
 		glEnable(GL_TEXTURE_2D);
-	
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/titulo.png").id);
 
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glDisable(GL_LIGHTING);
+
+		int tam = 5;
+		glPushMatrix();
+		glTranslatef(4.0f, 0.0f, 0.1f);
+		glBegin(GL_POLYGON);
+		glColor4f(1, 1, 1, 0.9);
+		glTexCoord2d(0, 0); glVertex3d(-tam, 0, -tam);
+		glTexCoord2d(1, 0); glVertex3d(tam, 0, -tam);
+		glTexCoord2d(1, 1); glVertex3d(tam, 0, tam);
+		glTexCoord2d(0, 1); glVertex3d(-tam, 0, tam);
+		glEnd();
+		glPopMatrix();
+
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
+
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/texto.png").id);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glDisable(GL_LIGHTING);
+
+		tam = 1.1;
+		int alarg = 3;
+		glPushMatrix();
+		glTranslatef(4.0f, 2.0f, 4.0f);
+		glBegin(GL_POLYGON);
+		glColor4f(1, 1, 1, 1);
+		glTexCoord2d(0, 0); glVertex3d(-tam - alarg, 0, -tam);
+		glTexCoord2d(1, 0); glVertex3d(tam + alarg, 0, -tam);
+		glTexCoord2d(1, 1); glVertex3d(tam + alarg, 0, tam);
+		glTexCoord2d(0, 1); glVertex3d(-tam - alarg, 0, tam);
+		glEnd();
+		glPopMatrix();
+
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 
 
 	}
@@ -131,7 +175,7 @@ void CoordinadorAjedrez::dibuja() {
 		else
 			turnonum = 1;
 		if (accion == 1) {
-			pieza.vermovimiento(tablero, origen, turnonum);
+			est = pieza.vermovimiento(tablero, origen, turnonum);
 		}
 		else if (accion == 2) {
 			if (tablero.mover(origen, destino) == 1) {
@@ -150,18 +194,74 @@ void CoordinadorAjedrez::dibuja() {
 			destino.y = -1;
 		}
 		mundo.dibuja(tablero);
+		if (est == 1)
+			estado = AHOGADOB;
+		if (est == 2)
+			estado = AHOGADON;
 	}
-	else if (estado == GAMEOVER
+	else if (estado == GANANNEGRAS
 		)
 	{
-		
+		mundo.dibuja(tablero);
+		ETSIDI::setTextColor(1, 0, 0);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::printxy("GAMEOVER: Has perdido",
+			-5, 10);
+		ETSIDI::printxy("Pulsa-C- para continuar",
+			-5, 5);
 	}
-	else if (estado == FIN
+	else if (estado == GANANBLANCAS
 		)
 	{
+		//mundo.dibuja();
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::printxy("ENHORABUENA, ¡Has triunfado!",
+			-5, 10);
+		ETSIDI::printxy("Pulsa-C- para continuar", -5, 9);
 	}
 	else if (estado == PAUSA)
 	{
-		
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/pausa.png").id);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glDisable(GL_LIGHTING);
+
+		int tam = 2;
+		int alarg = 3;
+		glPushMatrix();
+		glTranslatef(0.0f, 1.0f, -1.2f);
+		glBegin(GL_POLYGON);
+		glColor4f(1, 1, 1, 1);
+		glTexCoord2d(0, 0); glVertex3d(-tam - alarg, 0, -tam);
+		glTexCoord2d(1, 0); glVertex3d(tam + alarg, 0, -tam);
+		glTexCoord2d(1, 1); glVertex3d(tam + alarg, 0, tam);
+		glTexCoord2d(0, 1); glVertex3d(-tam - alarg, 0, tam);
+		glEnd();
+		glPopMatrix();
+
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
 	}
+}
+void CoordinadorAjedrez::checkfinal(Tablero tablero)
+{
+	int n = 0, b = 0;
+	int i, j;
+	for (i = 0; i < 8; i++)
+	{
+		for (j = 0; j < 8; j++)
+		{
+			if (tablero.tablero[i][j] < 1)//Hay al menos una pieza blanca
+				b = 1;
+			if (tablero.tablero[i][j] > 1)//Hay al menos una pieza negra
+				n = 1;
+		}
+	}
+	if (b == 0)
+		estado = GANANNEGRAS;
+	if (n == 0)
+		estado = GANANBLANCAS;
 }
