@@ -17,11 +17,11 @@ public:
 	enum Turno {BLANCAS, NEGRAS};
 	Turno turno;
 	int accion; // 0:Ninguna pieza seleccionada  1:Una pieza seleccionada 2:Una pieza y un destino seleccionado
+	void finalcheck(Tablero Tablero);
 protected:
 	Mundo mundo;
 	enum Estado { INICIO, JUEGO, FIN, GAMEOVER, PAUSA };
 	Estado estado;
 	Casilla origen, destino;
 	Pieza pieza;
-	void finalcheck(Tablero Tablero);
 };
