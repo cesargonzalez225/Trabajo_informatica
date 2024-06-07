@@ -54,13 +54,13 @@ void CoordinadorAjedrez::tecla(unsigned char key)
 	else if (estado == GANANBLANCAS)
 	{
 		ETSIDI::stopMusica();
-		if (key == 'c')
+		if (key == 'i')
 			estado = INICIO;
 	}
 	else if (estado == GANANNEGRAS)
 	{
 		ETSIDI::stopMusica();
-		if (key == 'c')
+		if (key == 'i')
 			estado = INICIO;
 	}
 }
@@ -198,8 +198,9 @@ void CoordinadorAjedrez::dibuja() {
 	}
 	else if (estado == GANANBLANCAS)
 	{
+
 		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/gananAzules.png").id);
+		glBindTexture(GL_TEXTURE_2D, ETSIDI::getTexture("imagenes/gananoAzules.png").id);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
