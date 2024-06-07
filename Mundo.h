@@ -4,12 +4,10 @@
 
 class Mundo 
 {
-private:
-    Tablero tablero;
-
 public:
 	Mundo();
 	virtual ~Mundo();
 
-    void dibuja();
+    	void dibuja(Tablero& );
+	void dibujarPiezas(Tablero& );
 };
