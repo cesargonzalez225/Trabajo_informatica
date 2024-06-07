@@ -14,6 +14,7 @@ Tablero::Tablero(void)
 		for (int j=0; j<8; j++) 
         {
 			tablero[i][j] = Inicio[i][j];
+			iluminacion[i][j] = 0;
 		}
 	}
 }
@@ -24,20 +25,4 @@ int Tablero::Inicio[8][8]=
 void Tablero::dibuja()
 {
     
-}
-
-int Tablero::leerCasilla(Casilla &casilla)
-{
-  return tablero[casilla.x][casilla.y];
-}
-
-void Tablero::reset()
-{
-	for (int i=0; i<8; i++) 
-    {
-		for (int j=0; j<8; j++) 
-        {
-			tablero[i][j] = Inicio[i][j];
-		}
-	}
 }
