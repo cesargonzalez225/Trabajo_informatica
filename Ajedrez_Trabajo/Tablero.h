@@ -7,8 +7,11 @@ public:
 	Tablero(void);
 	virtual ~Tablero(void);
 
-	int tablero[8][8];
+	int tablero[8][8]; //matriz de piezas del tablero
+	int iluminacion[8][8]; //matriz de casillas iluminadas del tablero
 	void dibuja();
 	int leerCasilla(Casilla& casilla);
-	void reset();
+	int mover(Casilla, Casilla);
+	void ceroilum();
+	
 };
