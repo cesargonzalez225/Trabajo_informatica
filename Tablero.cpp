@@ -24,5 +24,41 @@ int Tablero::Inicio[8][8]=
 
 void Tablero::dibuja()
 {
-    
+glPushMatrix();
+glTranslatef(-4, 0.1, -6.2);
+float tamañoCuadrado = 1.0f;
+int tamañoTablero = 8;
+
+//Dibujar el tablero
+for (int i = 0; i < tamañoTablero; ++i) 
+{
+	for (int j = 0; j < tamañoTablero; ++j) 
+	{
+		if (iluminacion[i][j] == 1) //Fija el código de colores a utilizar en la primera casilla
+		{
+			glColor3f(0.7, 0.1, 0.7);
+		}
+		else //Fija los colores del resto, diferenciando si la casilla tiene una posicion par o impar (sumando columnas y filas)
+		{
+			if ((i + j) % 2 == 0) 
+			{
+				glColor3f(0.1, 0.1, 0.7); //blanco
+			}
+			else 
+			{
+				glColor3f(0.0, 0.0, 0.2); //negro
+			}
+		}
+
+		glBegin(GL_QUADS);
+		glVertex3f(j * tamañoCuadrado, 0, i * tamañoCuadrado);
+		glVertex3f((j + 1) * tamañoCuadrado, 0, i * tamañoCuadrado);
+		glVertex3f((j + 1) * tamañoCuadrado, 0, (i + 1) * tamañoCuadrado);
+		glVertex3f(j * tamañoCuadrado, 0, (i + 1) * tamañoCuadrado);
+		glEnd();
+	}
+}
+
+glPopMatrix();
+
 }
