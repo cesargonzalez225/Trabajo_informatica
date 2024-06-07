@@ -246,22 +246,23 @@ void CoordinadorAjedrez::dibuja() {
 		glEnable(GL_TEXTURE_2D);
 	}
 }
-void CoordinadorAjedrez::checkfinal(Tablero tablero)
+void CoordinadorAjedrez::finalcheck(Tablero tablero)
 {
-	int n = 0, b = 0;
-	int i, j;
-	for (i = 0; i < 8; i++)
+	int pb = 0, pn = 0;
+	for (int i = 0; i < 8; i++)
 	{
-		for (j = 0; j < 8; j++)
+		for (int j = 0; j < 8; j++)
 		{
-			if (tablero.tablero[i][j] < 1)//Hay al menos una pieza blanca
-				b = 1;
-			if (tablero.tablero[i][j] > 1)//Hay al menos una pieza negra
-				n = 1;
+			if (tablero.tablero[i][j] < 0)
+				pb = 1;
+			if (tablero.tablero[i][j] > 0)
+				pn = 1;
 		}
 	}
-	if (b == 0)
+	if (pb == 0)
 		estado = GANANNEGRAS;
-	if (n == 0)
+	if (pn == 0)
 		estado = GANANBLANCAS;
+
 }
+
