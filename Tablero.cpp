@@ -59,6 +59,17 @@ for (int i = 0; i < tamañoTablero; ++i)
 	}
 }
 
+	// Dibujar los bordes
+	glColor3f(0.5, 0.5, 0.5); // Gris
+	glLineWidth(5.0); // grosor del borde del tablero
+
+	glBegin(GL_LINE_LOOP);
+	glVertex3f(0, 0, 0);
+	glVertex3f(tamañoTablero * tamañoCuadrado, 0, 0);
+	glVertex3f(tamañoTablero * tamañoCuadrado, 0, tamañoTablero * tamañoCuadrado);
+	glVertex3f(0, 0, tamañoTablero * tamañoCuadrado);
+	glEnd();
+
 glPopMatrix();
 
 }
